@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api'; // tu backend
+  private apiUrl = 'http://18.209.32.133:8080/api';
 
   constructor(private http: HttpClient, private router: Router) {}
 

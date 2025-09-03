@@ -9,3 +9,7 @@
   min-height: 80px !important; 
   height: 80px !important;
 }
+
+.nav-link {
+  size: 102px;
+}

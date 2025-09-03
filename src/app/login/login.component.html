@@ -1,16 +1,26 @@
-<div class="container mt-5">
-  <h2>Login</h2>
-  <form (ngSubmit)="login()">
-    <div class="mb-3">
-      <label>Usuario</label>
-      <input [(ngModel)]="username" name="username" class="form-control" />
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card">
+    <img class="card-img-top" src="assets/images/HeaderIMG.jpg" alt="Card image cap">
+    <div class="card-body">
+      <div class="container d-flex h-100">
+        <div class="row align-middle justify-content-center align-self-center">
+            <h2>Login</h2>
+            <form (ngSubmit)="login()">
+              <div class="mb-3">
+                <label>Usuario</label>
+                <input [(ngModel)]="username" name="username" class="form-control" />
+              </div>
+              <div class="mb-3">
+                <label>Contraseña</label>
+                <input [(ngModel)]="password" type="password" name="password" class="form-control" />
+              </div>
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+            </form>
+            <p class="text-danger" *ngIf="error">{{ error }}</p>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label>Contraseña</label>
-      <input [(ngModel)]="password" type="password" name="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Ingresar</button>
-  </form>
-  <p class="text-danger" *ngIf="error">{{ error }}</p>
+  </div>
 </div>
+
 <router-outlet></router-outlet>

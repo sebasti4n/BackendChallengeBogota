@@ -1,13 +1,14 @@
-<div class="container">
-      <app-nav-bar (sidenavToggle)="sidenav.toggle()"></app-nav-bar>
-      <br>
+<app-nav-bar (sidenavToggle)="sidenav.toggle()"></app-nav-bar>
+<br>
 
+<div class="container">
     <h2>Solicitudes de Aprobación</h2>
     <hr color=303d8d size="6px" style="border: solid"/>
     <br>
     <div class="row justify-content-end">
         <div class="col-1">
-            <button type="button" class="btn btn-outline-dark" routerLink="/nuevaSolicitud">
+            <button type="button" class="btn btn-outline-primary" routerLink="/nuevaSolicitud">
+              Nueva Solicitud
                 <i class="bi bi-plus-circle"></i>
             </button>
         </div>
@@ -46,7 +47,6 @@
                                   </button>
                                 </div>
                              </div>
-                              
                           </div>
                         </td>
                       </tr>

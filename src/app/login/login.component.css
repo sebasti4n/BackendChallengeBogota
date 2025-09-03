@@ -1,0 +1,7 @@
+.d-flex {
+    flex-direction: column;
+}
+
+.container{
+    padding: 5%;
+}

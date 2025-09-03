@@ -41,7 +41,7 @@ export class ApprovalRequestService{
             next: response => {console.log("Respuesta Post:", response); 
                                this.getList();
             },
-            error: err => console.log("Error al guardar appointment:", err),
+            error: err => console.log("Error al guardar :", err),
             complete: () => console.log("Petición completada")
             });
 

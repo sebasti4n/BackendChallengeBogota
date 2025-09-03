@@ -24,7 +24,7 @@ export class SolicitudNuevaComponent {
                                       description:"",
                                       approver:"",
                                       type:"",
-                                      currentState:""
+                                      currentState:"PENDING"
                                      }
 
   constructor(private service : ApprovalRequestService, private formBuilder: FormBuilder){
@@ -39,13 +39,14 @@ export class SolicitudNuevaComponent {
   save(){
     if (this.form.invalid) return;
 
-  const formValues = this.form.value;
+    const formValues = this.form.value;
 
-  this.newRequest.title = formValues.titulo;
-  this.newRequest.description = formValues.descripcion;
-  this.newRequest.approver = formValues.approver;
-  this.newRequest.type = formValues.type;
-  this.newRequest.requester = localStorage.getItem('user') || "";
+    this.newRequest.title = formValues.titulo;
+    this.newRequest.description = formValues.descripcion;
+    this.newRequest.approver = formValues.approver;
+    this.newRequest.type = formValues.type;
+    this.newRequest.requester = localStorage.getItem('user') || "";
+    this.newRequest.currentState = "PENDING";
     this.service.save(this.newRequest);
   }
 

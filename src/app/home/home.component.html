@@ -5,7 +5,7 @@
     <h2>Solicitudes de Aprobación</h2>
     <hr color=303d8d size="6px" style="border: solid"/>
     <br>
-    <div class="row justify-content-end">
+    <div class="row justify-content-end" *ngIf="roleService.isSolicitante()">
         <div class="col-1">
             <button type="button" class="btn btn-outline-primary" routerLink="/nuevaSolicitud">
               Nueva Solicitud
@@ -36,13 +36,13 @@
                              <div class="row">
                                 <div class="col">
                                   <button  
-                                      (click)="approve(i)" class="btn btn-success  btn-sm">
+                                      (click)="openActionModal('APPROVED', data)" class="btn btn-success  btn-sm">
                                     Aprobar
                                   </button>
                                 </div>
                                 <div class="col">
                                   <button 
-                                        (click)="reject(i)" class="btn btn-danger  btn-sm">
+                                        (click)="openActionModal('REJECTED', data)" class="btn btn-danger  btn-sm">
                                     Rechazar
                                   </button>
                                 </div>
@@ -55,4 +55,24 @@
       </table>
 
      
+</div>
+
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{actionType === 'APPROVED' ? 'Aprobar' : 'Rechazar'}} solicitud</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <textarea [(ngModel)]="comment" class="form-control" placeholder="Escriba un comentario"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="confirmAction()">Confirmar</button>
+      </div>
+    </div>
+  </div>
 </div>

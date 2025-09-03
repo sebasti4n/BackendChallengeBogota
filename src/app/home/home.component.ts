@@ -27,43 +27,60 @@ export class HomeComponent {
                                     );
   }
 
-  approve(id: number) {
-    console.log("Reject solicitud*");
-    console.log(this.dataSourceTable[id].approver);
-    console.log(localStorage.getItem("user"));
-    if (this.dataSourceTable[id].approver === localStorage.getItem("user")){
-      console.log("Reject solicitud");
-      this.service.approveRequest(this.dataSourceTable[id].id!,  "Rechazado por políticas")
-      .subscribe({
+  approve(id: number, comment: string) {
+    const request = this.dataSourceTable.find(r => r.id === id);
+    if (request && request.approver === localStorage.getItem("user")) {
+      this.service.approveRequest(id, comment).subscribe({
         next: res => {
           console.log('Aprobado', res);
-          this.getData(); // refrescar la tabla
+          this.getData();
         },
         error: err => console.error('Error al aprobar', err)
       });
     }
   }
 
-  reject(id: number) {
-    console.log("Reject solicitud*");
-    console.log(this.dataSourceTable[id].approver);
-    console.log(localStorage.getItem("user"));
-    if (this.dataSourceTable[id].approver === localStorage.getItem("user")){
-      console.log("Reject solicitud");
-      this.service.rejectRequest(this.dataSourceTable[id].id!, "Rechazado por políticas")
-      .subscribe({
+  reject(id: number, comment: string) {
+    const request = this.dataSourceTable.find(r => r.id === id);
+    if (request && request.approver === localStorage.getItem("user")) {
+      this.service.rejectRequest(id, comment).subscribe({
         next: res => {
           console.log('Rechazado', res);
-          this.getData(); // refrescar la tabla
+          this.getData();
         },
         error: err => console.error('Error al rechazar', err)
       });
-    }  
+    }
   }
-
 
   
   ngOnInit(): void {
     this.getData();
   } 
+
+showModal = false;
+actionType = '';
+request : approvalRequests | null = null;;
+comment = '';
+
+openActionModal(type: string, request: approvalRequests) {
+  this.actionType = type;
+  this.request = request;
+  this.showModal = true;
+}
+
+closeModal() {
+  this.showModal = false;
+  this.comment = '';
+}
+
+confirmAction() {
+  if (this.request === null) return;
+  if (this.actionType === 'APPROVED'){
+    this.approve(this.request.id!, this.comment);
+  } else if (this.actionType === 'REJECTED') {
+    this.reject(this.request.id!, this.comment)
+  }
+  this.closeModal();
+}
 }

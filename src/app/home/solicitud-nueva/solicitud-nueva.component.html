@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <form [formGroup]="form">
+    <div class="card p-4">
+      <h2>Solicitud - Nueva Solicitud</h2>
+      <hr class="border-primary border-3" />
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="titulo" class="form-label">Ingresa el Titulo</label>
+          <div class="input-group">
+            <input type="text" id="titulo" class="form-control" formControlName="titulo" placeholder="Titulo">
+            <button *ngIf="tituloValue" type="button" class="btn btn-outline-secondary" (click)="tituloValue=''">✖</button>
+          </div>
+          <div *ngIf="form.get('titulo')?.invalid && form.get('titulo')?.touched" class="text-danger">
+            El titulo es requerido
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <div class="input-group">
+            <input type="text" id="descripcion" class="form-control" formControlName="descripcion" placeholder="Descripción de la prueba">
+            <button *ngIf="descripcionValue" type="button" class="btn btn-outline-secondary" (click)="descripcionValue=''">✖</button>
+          </div>
+          <div *ngIf="form.get('descripcion')?.invalid && form.get('descripcion')?.touched" class="text-danger">
+            La descripción es requerida
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+          <label for="approver" class="form-label">Ingresa el Responsable</label>
+          <div class="input-group">
+            <input type="text" id="approver" class="form-control" formControlName="approver" placeholder="approver">
+            <button *ngIf="approverValue" type="button" class="btn btn-outline-secondary" (click)="approverValue=''">✖</button>
+          </div>
+          <div *ngIf="form.get('approver')?.invalid && form.get('approver')?.touched" class="text-danger">
+            El Responsable es requerido
+          </div>
+      </div>
+
+      <div class="col-md-6">
+          <label for="type" class="form-label">Ingresa el Tipo</label>
+          <div class="input-group">
+            <select id="type" class="form-select" formControlName="type">
+                <option value="" disabled>Seleccione un tipo</option>
+                <option *ngFor="let option of typeOptions" [value]="option">{{ option }}</option>
+                </select>
+          </div>
+          <div *ngIf="form.get('type')?.invalid && form.get('type')?.touched" class="text-danger">
+            El tipo es requerido
+          </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-auto">
+          <button type="button" class="btn btn-success me-2"
+                  [disabled]="form.invalid"
+                  (click)="save()"
+                  routerLink="/home">
+            Guardar
+          </button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-danger" routerLink="/home">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+      <app-nav-bar (sidenavToggle)="sidenav.toggle()"></app-nav-bar>
+      <br>
+
+    <h2>Histórico</h2>
+    <hr color=303d8d size="6px" style="border: solid"/>
+    <br>
+
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let column of columnsToDisplay">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let data of dataSourceTable">
+                    <tr >
+                        <th scope="row">{{data.id}}</th>
+                        <td>{{data.requestId}}</td>
+                        <td>{{data.state}}</td>
+                        <td>{{data.actionBy}}</td>
+                        <td>{{data.comment}}</td>
+                        <td>{{data.actionAt}}</td>
+                      </tr>
+            </ng-container>
+        </tbody>
+      </table>
+
+     
+</div>

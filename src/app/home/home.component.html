@@ -1,0 +1,58 @@
+<div class="container">
+      <app-nav-bar (sidenavToggle)="sidenav.toggle()"></app-nav-bar>
+      <br>
+
+    <h2>Solicitudes de Aprobación</h2>
+    <hr color=303d8d size="6px" style="border: solid"/>
+    <br>
+    <div class="row justify-content-end">
+        <div class="col-1">
+            <button type="button" class="btn btn-outline-dark" routerLink="/nuevaSolicitud">
+                <i class="bi bi-plus-circle"></i>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let column of columnsToDisplay">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let data of dataSourceTable , let i = index">
+                    <tr >
+                        <th scope="row">{{data.id}}</th>
+                        <td>{{data.title}}</td>
+                        <td>{{data.requester}}</td>
+                        <td>{{data.description}}</td>
+                        <td>{{data.approver}}</td>
+                        <td>{{data.type}}</td>
+                        <td>{{data.currentState}}</td>
+                        <td *ngIf="roleService.isResponsable()">
+                          <div class="container" *ngIf="data.currentState==='PENDING'">
+                             <div class="row">
+                                <div class="col">
+                                  <button  
+                                      (click)="approve(i)" class="btn btn-success  btn-sm">
+                                    Aprobar
+                                  </button>
+                                </div>
+                                <div class="col">
+                                  <button 
+                                        (click)="reject(i)" class="btn btn-danger  btn-sm">
+                                    Rechazar
+                                  </button>
+                                </div>
+                             </div>
+                              
+                          </div>
+                        </td>
+                      </tr>
+            </ng-container>
+        </tbody>
+      </table>
+
+     
+</div>

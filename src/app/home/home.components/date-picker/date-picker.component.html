@@ -1,0 +1,25 @@
+<form [formGroup]="myForm" (ngSubmit)="confirmDate(myForm.get('date')?.value)" class="d-flex gap-2 align-items-end">
+  
+  <div class="form-group flex-grow-1">
+    <label for="date" class="form-label">Elige una fecha</label>
+    <div class="input-group">
+      <input type="text" 
+             class="form-control" 
+             placeholder="DD-MM-YYYY"
+             formControlName="date"
+             ngbDatepicker
+             #dp="ngbDatepicker">
+      <button class="btn btn-outline-secondary" type="button" (click)="dp.toggle()">
+        <i class="bi bi-calendar"></i>
+      </button>
+    </div>
+    <div class="text-danger mt-1" *ngIf="myForm.get('date')?.invalid && myForm.get('date')?.touched">
+      La fecha es requerida
+    </div>
+  </div>
+
+  <button class="btn btn-primary d-flex align-items-center" type="submit" [disabled]="myForm.invalid">
+    <i class="bi bi-search me-1"></i>
+    Consultar
+  </button>
+</form>

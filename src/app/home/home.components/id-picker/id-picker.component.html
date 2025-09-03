@@ -1,0 +1,30 @@
+<form #form="ngForm" class="mb-3 d-flex align-items-end gap-2">
+  <div class="form-group flex-grow-1">
+    <label for="idSeleccionado" class="form-label">Ingresa el ID del afiliado</label>
+    <div class="input-group">
+      <input type="number" 
+             class="form-control" 
+             id="idSeleccionado" 
+             name="idSeleccionado" 
+             [(ngModel)]="value"
+             #idSeleccionado="ngModel"
+             required
+             min="1"
+             placeholder="ID del afiliado">
+      <button *ngIf="value" class="btn btn-outline-secondary" type="button" (click)="value=''">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="text-danger mt-1" *ngIf="idSeleccionado.invalid && (idSeleccionado.dirty || idSeleccionado.touched)">
+      El ID del afiliado es inválido
+    </div>
+  </div>
+
+  <button class="btn btn-primary d-flex align-items-center" 
+          [disabled]="idSeleccionado.invalid"
+          type="button"
+          (click)="confirmId(idSeleccionado.value)">
+    <i class="bi bi-search me-1"></i>
+    Consultar
+  </button>
+</form>
